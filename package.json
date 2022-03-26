@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push-dist": "git subtree push --prefix dist origin gh-pages"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.16.0",
