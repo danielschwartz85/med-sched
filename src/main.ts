@@ -1,5 +1,9 @@
 import './style.css'
 
+const TIME_NOON = 12
+const TIME_AFTER_NOON = 16
+const TIME_EVENING = 18
+
 // eslint-disable-next-line no-unused-vars
 enum EUnit {
   // eslint-disable-next-line no-unused-vars
@@ -31,6 +35,7 @@ interface IMed {
 const { medications: Medications, fromDate: FromDate, numOfDays: NumOfDays } = getConfiguration()
 loadDates()
 loadDay()
+scrollToTimeOfDay()
 
 /*
  * TODO
@@ -41,6 +46,37 @@ loadDay()
  * colours for day competed or missing
  * url builder + builder page
  */
+
+function scrollToTimeOfDay(): void {
+  const hour = new Date().getHours()
+  const timesOfDay = [
+    document.getElementById('morning'),
+    document.getElementById('noon'),
+    document.getElementById('afterNoon'),
+    document.getElementById('evening'),
+  ]
+  let idx: number
+  if (hour < TIME_NOON) {
+    idx = 0
+  } else if (hour < TIME_AFTER_NOON) {
+    idx = 1
+  } else if (hour < TIME_EVENING) {
+    idx = 2
+  } else {
+    idx = 3
+  }
+  // get time of day element, if missing get next one
+  let timeOfDayElement = timesOfDay.find((elem, elemIdx) => idx <= elemIdx && elem)
+  // if still missing get previous one
+  if (!timeOfDayElement) {
+    const reverseIdx = timesOfDay.length - idx - 1
+    timeOfDayElement = timesOfDay.reverse().find((elem, elemIdx) => reverseIdx <= elemIdx && elem)
+  }
+  timeOfDayElement?.scrollIntoView({
+    block: 'center',
+    behavior: 'smooth',
+  })
+}
 
 function loadDay(): void {
   const currentDate = getSelectedDate()
@@ -165,7 +201,7 @@ function getCheckbox(): HTMLElement {
 function loadDates(): void {
   const sideBar = document.getElementById('sidenav')
   const now = new Date()
-  for (let day = 1; day <= NumOfDays; ++day) {
+  for (let day = 0; day < NumOfDays; ++day) {
     const date = new Date(FromDate)
     date.setDate(date.getDate() + day)
     const a = document.createElement('a')
