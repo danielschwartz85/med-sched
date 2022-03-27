@@ -134,6 +134,7 @@ function loadMedicine({
 }): HTMLElement {
   const nameDiv = document.createElement('div')
   nameDiv.innerText = `${name} `
+  nameDiv.classList.add('unselectable')
   if (description) {
     nameDiv.setAttribute('aria-label', description)
     nameDiv.setAttribute('data-balloon-pos', 'up')
@@ -293,7 +294,7 @@ function getConfiguration(): { fromDate: Date; numOfDays: number; medications: I
         eveningAmount: 10,
         type: 'Homeopathy',
         unit: EUnit.Drops,
-        description: 'לאכול רק אחרי חצי שעה',
+        description: 'על קיבה ריקה, לאכול רק אחרי חצי שעה',
       },
     ],
   }
