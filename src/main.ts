@@ -135,7 +135,9 @@ function loadMedicine({
   const nameDiv = document.createElement('div')
   nameDiv.innerText = `${name} `
   if (description) {
-    nameDiv.setAttribute('alt', description)
+    nameDiv.setAttribute('aria-label', description)
+    nameDiv.setAttribute('data-balloon-pos', 'up')
+    nameDiv.setAttribute('data-balloon-length', 'medium')
   }
   const unitSpan = document.createElement('span')
   unitSpan.innerText = `${amount} ${UnitViewMap[unit]}`
