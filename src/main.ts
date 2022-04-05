@@ -221,7 +221,6 @@ function loadDates(): void {
 
     if (date.getTime() <= now.getTime()) {
       a.className = 'past'
-      console.log('🚀 XXXX ~ file: main.ts ~ line 231 ~ loadDates ~ !!!')
       date.getDate() === now.getDate() && a.classList.add('selected')
     }
   }
