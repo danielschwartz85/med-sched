@@ -219,12 +219,9 @@ function loadDates(): void {
     a.onclick = selectDay
     a.setAttribute('value', date.toISOString())
 
-    if (
-      date.getFullYear() <= now.getFullYear() &&
-      date.getMonth() <= now.getMonth() &&
-      date.getDate() <= now.getDate()
-    ) {
+    if (date.getTime() <= now.getTime()) {
       a.className = 'past'
+      console.log('🚀 XXXX ~ file: main.ts ~ line 231 ~ loadDates ~ !!!')
       date.getDate() === now.getDate() && a.classList.add('selected')
     }
   }
