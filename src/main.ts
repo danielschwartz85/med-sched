@@ -36,16 +36,24 @@ const { medications: Medications, fromDate: FromDate, numOfDays: NumOfDays } = g
 loadDates()
 loadDay()
 scrollToTimeOfDay()
+scrollToSelectd() // today
 
 /*
  * TODO
- * fix last date
  * add reset
- * tooltip description
  * colours for types of medicine
  * colours for day competed or missing
  * url builder + builder page
  */
+
+function scrollToSelectd(): void {
+  const sideBar: HTMLElement = <HTMLElement>document.getElementById('sidenav')
+  const date: any = Array.from(sideBar.children).find((day) => day.classList.contains('selected'))
+  date?.scrollIntoView({
+    block: 'center',
+    behavior: 'smooth',
+  })
+}
 
 function scrollToTimeOfDay(): void {
   const hour = new Date().getHours()
